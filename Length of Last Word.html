@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Length of Last Word</title>
+</head>
+<body>
+	<script>
+		/*
+			Given a string s consists of upper/lower-case alphabets and empty space characters ' ', return the length of last word in the string.
+
+			If the last word does not exist, return 0.
+
+			Note: A word is defined as a character sequence consists of non-space characters only.
+
+			For example, 
+			Given s = "Hello World",
+			return 5.
+		*/
+		/**
+		 * @param {string} s
+		 * @return {number}
+		 */
+		var lengthOfLastWord = function(s) {
+		    var flag = -1;
+		    var len = s.length;
+		    var end = len - 1;
+		    while(s[end] === ' ' && end >= 0){
+		        end--;
+		    }
+		    if(end === -1) return 0;
+		    var begin = end - 1;
+		    while(s[begin] !== ' ' && begin >= 0){
+		        begin--;
+		    }
+		    return end - begin;
+		};
+	</script>
+</body>
+</html>

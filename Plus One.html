@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Plus One</title>
+</head>
+<body>
+	<script>
+		/*
+			Given a non-negative integer represented as a non-empty array of digits, plus one to the integer.
+
+			You may assume the integer do not contain any leading zero, except the number 0 itself.
+
+			The digits are stored such that the most significant digit is at the head of the list.
+		*/
+		/**
+		 * @param {number[]} digits
+		 * @return {number[]}
+		 */
+		var plusOne = function(digits) {
+		    var len = digits.length;
+		    var end = len - 1;
+		    var flag = 1;
+		    while(flag && end >= 0){
+		        var num = digits[end] + flag;
+		        digits[end] = num % 10;
+		        if(num >= 10){
+		            flag = Math.floor(num / 10);
+		        } else {
+		            flag = 0;
+		        }
+		        end--;
+		    }
+		    if(end === -1 && flag){
+		        digits.unshift(1);
+		    }
+		    return digits;
+		};
+	</script>
+</body>
+</html>
