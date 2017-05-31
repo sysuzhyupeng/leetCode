@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Missing Number</title>
+</head>
+<body>
+	<script>
+		/*
+			Given an array containing n distinct numbers taken from 0, 1, 2, ..., n, find the one that is missing from the array.
+
+			For example,
+			Given nums = [0, 1, 3] return 2.
+		*/
+		/**
+		 * @param {number[]} nums
+		 * @return {number}
+		 */
+		var missingNumber = function(nums) {
+			//使用快排，时间复杂度为nlogn
+		    nums = nums.sort(function(a, b){
+		        return a - b;
+		    });
+		    for(var i = 0,len = nums.length; i < len; i++){
+		        if(i !== nums[i]) return i;
+		    }
+		    return i;
+		};
+		var missingNumber = function(nums) {
+			var obj = {};
+			//使用对象存储，时间复杂度为n
+		    for(var i = 0, len = nums.length; i < len; i++){
+		        if(!obj[nums[i]]){
+		            obj[nums[i]] = 1;
+		        }
+		    }
+		    for(i = 0; i < len; i++){
+		        if(!obj[i]) return i;
+		    }
+		    return i;
+		}
+	</script>
+</body>
+</html>
