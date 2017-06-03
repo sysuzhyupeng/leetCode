@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Contains Duplicate</title>
+</head>
+<body>
+	<script>
+		/*
+			Given an array of integers, find if the array contains any duplicates. Your function should return true if any value appears at least twice in the array, and it should return false if every element is distinct.
+		*/
+		/**
+		 * @param {number[]} nums
+		 * @return {boolean}
+		 */
+		var containsDuplicate = function(nums) {
+		    var obj = {},
+		       len = nums.length;
+		    for(var i = 0; i < len; i++){
+		        if(!obj[nums[i]]){
+		            obj[nums[i]] = 1;
+		        } else {
+		            return true;
+		        }
+		    }
+		    return false;
+		};
+	</script>
+</body>
+</html>

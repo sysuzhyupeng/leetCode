@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Longest Palindrome</title>
+</head>
+<body>
+	<script>
+		/*
+			Given a string which consists of lowercase or uppercase letters, find the length of the longest palindromes that can be built with those letters.
+
+			This is case sensitive, for example "Aa" is not considered a palindrome here.
+			Input:
+			"abccccdd"
+
+			Output:
+			7
+
+			Explanation:
+			One longest palindrome that can be built is "dccaccd", whose length is 7.
+
+		*/
+		/**
+		 * @param {string} s
+		 * @return {number}
+		 */
+		var longestPalindrome = function(s) {
+		    var obj = {},
+		        len = s.length,
+		        count = 0;
+		    //使用对象存储每个字符出现的次数
+		    for(var i = 0; i < len; i++){
+		        if(!obj[s[i]]){
+		            obj[s[i]] = 1;
+		        } else {
+		            obj[s[i]]++;
+		        }
+		    }
+		    //出现2的倍数次的直接加上去
+		    //如果是比2的大的奇数，则取其中的n-1个字符
+		    for(var _key in obj){i
+		        if(obj[_key] % 2 === 0){
+		            count += obj[_key];
+		        } else if(obj[_key] > 2){
+		            count += obj[_key] - 1;
+		        }
+		    }
+		    //最后如果count小于len，可以再加上一个奇数放在最中间
+		    if(count + 1 <= len) {
+		        return count + 1;
+		    } else {
+		        return count;
+		    }
+		};
+	</script>
+</body>
+</html>
