@@ -1,7 +1,7 @@
 {
   "name": "leetcode",
   "version": "1.0.0",
-  "description": "",
+  "description": "<br> <h3>solving leetCode problems by JavaScript</h3> <br>",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
