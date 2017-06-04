@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Reverse String II</title>
+</head>
+<body>
+	<script>
+		/*
+			Given a string and an integer k, you need to reverse the first k characters for every 2k characters counting from the start of the string. If there are less than k characters left, reverse all of them. If there are less than 2k but greater than or equal to k characters, then reverse the first k characters and left the other as original.
+			Example:
+			Input: s = "abcdefg", k = 2
+			Output: "bacdfeg"	
+		*/
+		/**
+		 * @param {string} s
+		 * @param {number} k
+		 * @return {string}
+		 */
+		var reverseStr = function(s, k) {
+			//使用栈来reverse，因为没有使用reverse函数，所以代码比较复杂
+		    var stack = [];
+		    var strArr = Array.prototype.slice.call(s);
+		    var len = s.length;
+		    if(len <= k){
+		        for(var _i = 0; _i < len; _i++){
+		            stack.push(s[_i]);
+		        }
+		        for(_i = 0; _i < len; _i++){
+		            strArr[_i] = stack.pop();
+		        }
+		        return strArr.join('');
+		    }
+		    for(var i = 0; i < len; i++){
+		        var pos = Math.floor(i / k);
+		        if(pos % 2 === 0){
+		            stack.push(s[i]);
+		            if(len - pos * k <= k && i === len - 1){
+		                for(var j = pos * k; j < len; j++){
+		                    strArr[j] = stack.pop();
+		                }
+		            } else if((i+1) % k === 0){
+		                for(var _j = i + 1 - k; _j < i + 1; _j++){
+		                    strArr[_j] = stack.pop();
+		                }
+		            }
+		        } else {
+		            strArr[i] = s[i];
+		        }
+		    }
+		    return strArr.join('');
+		};
+	</script>
+</body>
+</html>
