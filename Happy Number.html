@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Happy Number</title>
+</head>
+<body>
+	<script>
+		/*
+			Write an algorithm to determine if a number is "happy".
+
+			A happy number is a number defined by the following process: Starting with any positive integer, replace the number by the sum of the squares of its digits, and repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1. Those numbers for which this process ends in 1 are happy numbers.
+
+			Example: 19 is a happy number
+
+			12 + 92 = 82
+			82 + 22 = 68
+			62 + 82 = 100
+			12 + 02 + 02 = 1
+		*/
+		/**
+		 * @param {number} n
+		 * @return {boolean}
+		 */
+		var isHappy = function(n) {
+			//题目意思是要么是happy number，要么会陷入一个数的无限循环中
+			//用对象来保存曾经出现过的结果
+		    var obj = {};
+		    while(true){
+		        var str = n.toString();
+		        var sum = 0;
+		        for(var i = 0, len = str.length; i < len; i++){
+		            var num = Number(str[i]);
+		            sum += num * num;
+		        }
+		        if(sum === 1) {
+		            return true;
+		        } else {
+		            if(!obj[sum]){
+		                obj[sum] = 1;
+		                n = Number(sum);
+		            } else {
+		                return false;
+		            }
+		        }
+		    }
+		};
+	</script>
+</body>
+</html>
