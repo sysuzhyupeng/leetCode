@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Climbing Stairs</title>
+</head>
+<body>
+	<script>
+		/*
+			You are climbing a stair case. It takes n steps to reach to the top.
+
+			Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+
+			Note: Given n will be a positive integer.
+		*/
+		/**
+		 * @param {number} n
+		 * @return {number}
+		 */
+		var climbStairs = function(n) {
+			//第一个想到的方法是递归，但是由于递归存在大量重复计算，提交超时了
+		    if(n < 0) return 0;
+		    if(n === 1 || n === 0) return 1;
+		    return climbStairs(n - 1) + climbStairs(n - 2);
+		};
+		/**
+		 * @param {number} n
+		 * @return {number}
+		 */
+		var climbStairs = function(n) {
+			//使用动态规划，每走一步都保存在arr数组中
+		    var arr = [];
+		    arr[0] = arr[1] = 1;
+		    for(var i = 2; i <= n; i++){
+		        arr[i] = arr[i - 1] + arr[i - 2]; 
+		    }
+		    return arr[n];
+		};
+	</script>
+</body>
+</html>
