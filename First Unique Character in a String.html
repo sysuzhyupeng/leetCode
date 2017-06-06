@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>First Unique Character in a String</title>
+</head>
+<body>
+	<script type="text/javascript">
+		/*
+			Given a string, find the first non-repeating character in it and return it's index. If it doesn't exist, return -1.
+
+			Examples:
+
+			s = "leetcode"
+			return 0.
+
+			s = "loveleetcode",
+			return 2.
+		*/
+		/**
+		 * @param {string} s
+		 * @return {number}
+		 */
+		var firstUniqChar = function(s) {
+		    var flag = true;
+		    var arr = Array.prototype.slice.call(s);
+		    for(var i = 0, len = arr.length; i < len; i++){
+		        if(arr[i] !== ''){
+		            flag = true;
+		            for(var j = i + 1; j < len; j++){
+		                if(arr[i] === arr[j]){
+		                    arr[j] = '';
+		                    flag = false;
+		                }
+		            }
+		            if(flag) return i;
+		        }
+		    }
+		    return -1;
+		};
+	</script>
+</body>
+</html>

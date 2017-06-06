@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Reverse String</title>
+</head>
+<body>
+	<script type="text/javascript">
+		/*
+			Write a function that takes a string as input and returns the string reversed.
+
+			Example:
+			Given s = "hello", return "olleh".
+
+			Subscribe to see which companies asked this question.
+		 */
+		/**
+		 * @param {string} s
+		 * @return {string}
+		 */
+		var reverseString = function(s) {
+		    var stack = [];
+		    var str = '';
+		    for(var i = 0, len = s.length; i < len; i++){
+		        stack.push(s[i]);
+		    }
+		    while(stack.length){
+		        str += stack.pop();
+		    }
+		    return str;
+		};
+	</script>
+</body>
+</html>

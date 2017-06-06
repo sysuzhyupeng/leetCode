@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Single Number</title>
+</head>
+<body>
+	<script type="text/javascript">
+		/*
+			Given an array of integers, every element appears twice except for one. Find that single one.
+
+			Note:
+			Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
+
+			Subscribe to see which companies asked this question.
+		*/
+		/**
+		 * @param {number[]} nums
+		 * @return {number}
+		 */
+		var singleNumber = function(nums) {
+		    var result = 0;
+		    //使用异或
+		    // a ^ b 相当于( a && !b ) || ( !a && b )
+		    // 5 ^ 5 101 进行XOR位运算 101，得到000。
+		    for (var i = 0, len = nums.length; i < len; i++){
+		        result ^= nums[i];
+		    }
+		    return result;
+		};
+	</script>
+</body>
+</html>
