@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Power of Two</title>
+</head>
+<body>
+	<script>
+		/*
+			Given an integer, write a function to determine if it is a power of two.
+		*/
+		/**
+		 * @param {number} n
+		 * @return {boolean}
+		 */
+		var isPowerOfTwo = function(n) {
+		    if(n === 0) return false;
+		    while(n % 2 === 0){
+		        n = Math.floor(n / 2);
+		    }
+		    return n === 1;
+		};
+	</script>
+</body>
+</html>
