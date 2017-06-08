@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Reverse Linked List</title>
+</head>
+<body>
+	<script>
+		/*
+			Reverse a singly linked list.
+		*/
+		/**
+		 * Definition for singly-linked list.
+		 * function ListNode(val) {
+		 *     this.val = val;
+		 *     this.next = null;
+		 * }
+		 */
+		/**
+		 * @param {ListNode} head
+		 * @return {ListNode}
+		 */
+		var reverseList = function(head) {
+		    var node = head;
+		    while(node.next){
+		        var next = node.next;
+		        next.next = node;
+		        node = next;
+		    }
+		};
+	</script>
+</body>
+</html>
