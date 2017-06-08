@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Valid Anagram</title>
+</head>
+<body>
+	<script type="text/javascript">
+		/*
+			Given two strings s and t, write a function to determine if t is an anagram of s.
+
+			For example,
+			s = "anagram", t = "nagaram", return true.
+			s = "rat", t = "car", return false.
+
+			Note:
+			You may assume the string contains only lowercase alphabets.
+
+			Follow up:
+			What if the inputs contain unicode characters? How would you adapt your solution to such case?
+		*/
+		/**
+		 * @param {string} s
+		 * @param {string} t
+		 * @return {boolean}
+		 */
+		var isAnagram = function(s, t) {
+			//使用对象存储s的元素和个数
+			var slen = s.length,
+				tlen = t.length;
+			if(slen !=== tlen) return false;
+		    var obj = {};
+		    for(var i = 0; i < slen; i++){
+		        if(!obj[s[i]]){
+		            obj[s[i]] = 1;
+		        } else {
+		            obj[s[i]]++;
+		        }
+		    }
+		    for(var j = 0; j < tlen; j++){
+		        if(obj[t[j]] === undefined){
+		            return false;
+		        } else {
+		            obj[t[j]]--;
+		            if(obj[t[j]] === 0){
+		                delete(obj[t[j]]);
+		            }
+		        }
+		    }
+		    for(var key in obj){
+		        return false;
+		    }
+		    return true;
+		};
+	</script>
+</body>
+</html>
