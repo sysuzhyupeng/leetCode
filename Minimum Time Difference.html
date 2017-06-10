@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Minimum Time Difference</title>
+</head>
+<body>
+	<script>
+		/*
+			Given a list of 24-hour clock time points in "Hour:Minutes" format, find the minimum minutes difference between any two time points in the list.
+
+			Example 1:
+			Input: ["23:59","00:00"]
+			Output: 1
+			Note:
+			The number of time points in the given list is at least 2 and won't exceed 20000.
+			The input time is legal and ranges from 00:00 to 23:59.
+		*/
+		/**
+		 * @param {string[]} timePoints
+		 * @return {number}
+		 */
+		var findMinDifference = function(timePoints) {
+		    var arr = timePoints.sort(function(a, b){
+		        var middle = Number(a.split(':')[0]) - Number(b.split(':')[0]);
+		        if(middle !== 0){
+		            return middle;
+		        } else {
+		            return Number(a.split(':')[1]) - Number(b.split(':')[1]);
+		        }
+		    })
+		    var len = arr.length,
+		        minHour = 24,
+		       minMinute = 0;
+		    arr[len] = (Number(arr[0].split(':')[0]) + 24) + ':' + arr[0].split(':')[1];
+		    for(var i = 1; i <= len; i++){
+		         var flag = 0,
+		           timeArr1 = arr[i].split(':'),
+		            timeArr2 = arr[i - 1].split(':'),
+		            minute = Number(timeArr1[1] - timeArr2[1]);
+		        if(minute < 0){
+		            minute += 60;
+		            flag = 1;
+		        }
+		        var hour = Number(timeArr1[0]) - Number(timeArr2[0]) - flag;
+		        if(hour < minHour || (hour === minHour && minMinute > minute)){
+		            minHour = hour;
+		            minMinute = minute;
+		        }
+		    }
+		    return minHour * 60 + minMinute;
+		};
+	</script>
+</body>
+</html>
