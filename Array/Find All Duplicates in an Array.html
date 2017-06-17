@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Find All Duplicates in an Array</title>
+</head>
+<body>
+	<script>
+		/*
+			Given an array of integers, 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once.
+
+			Find all the elements that appear twice in this array.
+
+			Could you do it without extra space and in O(n) runtime?
+		*/
+		/**
+		 * @param {number[]} nums
+		 * @return {number[]}
+		 */
+		var findDuplicates = function(nums) {
+			//首先想到用hashmap的暴力解法
+		    var map = {},
+		       arr = [];
+		    for(var i = 0, len = nums.length; i < len; i++){
+		        if(!map[nums[i]]){
+		            map[nums[i]] = 1;
+		        } else {
+		            map[nums[i]]++;
+		        }
+		    }
+		    for(var key in map){
+		        if(map[key] >= 2){
+		            arr.push(Number(key));
+		        }
+		    }
+		    return arr;
+		};
+		//那么是否能够不借助外部存储呢
+		/**
+		 * @param {number[]} nums
+		 * @return {number[]}
+		 */
+		var findDuplicates = function(nums) {
+		    var arr = [];
+		    for(var i = 0, len = nums.length; i < len; i++){
+		    	//将数组当前扫描的值存在值 - 1的索引上，将数组元素变成相反数作为标记
+		    	//因为数组的值区间正好和长度相等，因此任何索引都可以找到
+		        var temp = Math.abs(nums[i]) - 1;
+		        if(nums[temp] < 0){
+		            arr.push(temp + 1);
+		        } else {
+		            nums[temp] = -nums[temp];
+		        }
+		    }
+		    return arr;
+		};
+	</script>
+</body>
+</html>
