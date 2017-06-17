@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Minimum Size Subarray Sum</title>
+</head>
+<body>
+	<script>
+		/*
+			Given an array of n positive integers and a positive integer s, find the minimal length of a contiguous subarray of which the sum ≥ s. If there isn't one, return 0 instead.
+
+			For example, given the array [2,3,1,2,4,3] and s = 7,
+			the subarray [4,3] has the minimal length under the problem constraint.
+		*/
+		/**
+		 * @param {number} s
+		 * @param {number[]} nums
+		 * @return {number}
+		 */
+		var minSubArrayLen = function(s, nums) {
+		    var len = nums.length;
+		    if(len === 0) return 0;
+		    var left = 0,
+		        right = 0,
+		        sum = 0,
+		        res = len + 1;
+
+		    //索引[left, right]，先让right++达到sum
+		    //索引[left, right]的和如果大于sum，就让left++
+		    //因为是right先移动，所以不可能错过某一个组合
+		    while(right < len){
+		        while(sum < s && right < len){
+		            sum += nums[right++];
+		        }
+		        while(sum >= s){
+		            res = Math.min(res, right - left);
+		            sum -= nums[left++];
+		        }
+		    }
+		    return res === len + 1 ? 0 : res;
+		};
+	</script>
+</body>
+</html>
