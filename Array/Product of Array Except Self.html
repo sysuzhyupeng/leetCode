@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Product of Array Except Self</title>
+</head>
+<body>
+	<script>
+		/*
+			Given an array of n integers where n > 1, nums, return an array output such that output[i] is equal to the product of all the elements of nums except nums[i].
+
+			Solve it without division and in O(n).
+
+			For example, given [1,2,3,4], return [24,12,8,6].
+		*/
+		/**
+		 * @param {number[]} nums
+		 * @return {number[]}
+		 */
+		var productExceptSelf = function(nums) {
+			//建立两个数组，来保存
+			//multiFirstToEnd[k]用来表示从nums[i]到nums[k - 1]的乘积
+			//multiEndToFirst[k]用来表示从nums[len - 1]到nums[k - 1]的乘积
+		    var multiFirstToEnd = [],
+		        multiEndToFirst = [],
+		        len = nums.length;
+		    var arr = [];
+		    multiFirstToEnd[0] = 1;
+		    multiEndToFirst[len - 1] = 1;
+		    for(var i = 0; i < len - 1; i++){
+		        multiFirstToEnd[i + 1] = multiFirstToEnd[i] * nums[i];
+		    }
+		    for(var j = len - 1; j > 0; j--){
+		        multiEndToFirst[j - 1] = multiEndToFirst[j] * nums[j];
+		    }
+		    for(var k = 0; k < len; k++){
+		        arr[k] = multiFirstToEnd[k] * multiEndToFirst[k];
+		    }
+		    return arr;
+		};
+	</script>
+</body>
+</html>
