@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Find the Duplicate Number</title>
+</head>
+<body>
+	<script>
+		/*
+			Given an array nums containing n + 1 integers where each integer is between 1 and n (inclusive), prove that at least one duplicate number must exist. Assume that there is only one duplicate number, find the duplicate one.
+
+			Note:
+			You must not modify the array (assume the array is read only).
+			You must use only constant, O(1) extra space.
+			Your runtime complexity should be less than O(n2).
+			There is only one duplicate number in the array, but it could be repeated more than once.
+		*/
+		/**
+		 * @param {number[]} nums
+		 * @return {number}
+		 */
+		var findDuplicate = function(nums) {
+			//抽屉原理，如果有十个苹果放到九个抽屉里，如果苹果全在抽屉里，则至少有一个抽屉里有两个苹果
+			//那么我们的任务就是找到这个抽屉
+			//n+1个数且在[0, n]区间内的数，每个数只出现一次的话，说明在[n/2, n]中也存在n/2个数
+			//如果超出的话，说明重复的数字就在这个区间内
+			//直接使用二分法查找
+		    var len = nums.length,
+		        min = 0,
+		        max = len - 1;
+		    while(min <= max){
+		        var mid = min + Math.floor((max - min) / 2);
+		        var count = 0;
+		        for(var i = 0; i < len; i++){
+		            if(nums[i] <= mid){
+		                count++;
+		            }
+		        }
+		        if(count > mid){
+		            max = mid - 1;
+		        } else {
+		            min = mid + 1;
+		        }
+		    }
+		    return min;
+		};
+	</script>
+</body>
+</html>
