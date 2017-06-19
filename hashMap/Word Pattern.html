@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Word Pattern</title>
+</head>
+<body>
+	<script type="text/javascript">
+		/*
+			Given a pattern and a string str, find if str follows the same pattern.
+
+			Here follow means a full match, such that there is a bijection between a letter in pattern and a non-empty word in str.
+
+			Examples:
+			pattern = "abba", str = "dog cat cat dog" should return true.
+			pattern = "abba", str = "dog cat cat fish" should return false.
+			pattern = "aaaa", str = "dog cat cat dog" should return false.
+			pattern = "abba", str = "dog dog dog dog" should return false.
+			Notes:
+			You may assume pattern contains only lowercase letters, and str contains lowercase letters separated by a single space.
+		 */
+		/**
+		 * @param {string} pattern
+		 * @param {string} str
+		 * @return {boolean}
+		 */
+		var wordPattern = function(pattern, str) {
+			//使用两个hashMap来存储pattern和str单词之间的映射
+			//例如map = { 'a':  'dog'}，diffMap = { 'dog': 'a' }
+			var pLen = pattern.length,
+			    strArr = str.split(' '),
+				sLen = strArr.length;
+			if(pLen !== sLen) return false;
+			var map = {},
+				diffMap = {};
+		    for(var i = 0; i < pLen; i++){
+		    	if(!diffMap[strArr[i]]){
+		    		diffMap[strArr[i]] =  pattern[i];
+		    	} else if(diffMap[strArr[i]] !== pattern[i]){
+		    		return false;
+		    	}
+		    	if(!map[pattern[i]]){
+		    		map[pattern[i]] = strArr[i];
+		    	} else if(map[pattern[i]] !== strArr[i]){
+		    		return false;
+		    	}
+		    }
+		    return true;
+		};
+	</script>
+</body>
+</html>

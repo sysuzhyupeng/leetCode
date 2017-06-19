@@ -6,51 +6,50 @@
 </head>
 <body>
 	<script>
-		
-/* Given an array of integers, return indices of the two numbers such that they add up to a specific target. 
-给定一个整数数组，返回数组的一对索引，能让他们相加是一个特定数字 
-You may assume that each input would have exactly one solution, and you may not use the same element twice. 
-你可以假设每一个输入只有唯一的答案，并且你不需要重复使用相同的元素 
-看完这个题目，我的第一个答案是这样的： */
+    /* Given an array of integers, return indices of the two numbers such that they add up to a specific target. 
+    给定一个整数数组，返回数组的一对索引，能让他们相加是一个特定数字 
+    You may assume that each input would have exactly one solution, and you may not use the same element twice. 
+    你可以假设每一个输入只有唯一的答案，并且你不需要重复使用相同的元素 
+    看完这个题目，我的第一个答案是这样的： */
 
-   var twoSum = function(nums, target) {
-       for(var i = 0, len = nums.length; i < len; i++){
-            for(var j = i + 1; j < nums.length; j++){
-                if(nums[i] + nums[j] == target){
-                    return [i, j];
+       var twoSum = function(nums, target) {
+           for(var i = 0, len = nums.length; i < len; i++){
+                for(var j = i + 1; j < nums.length; j++){
+                    if(nums[i] + nums[j] == target){
+                        return [i, j];
+                    }
                 }
             }
-        }
-    };
+        };
 
-//使用双重循环复杂度为n平方，然后发现nums[i] + nums[j] == target 这步还可以优化一下。于是用一个变量来保存，避免多次相加
+    //使用双重循环复杂度为n平方，然后发现nums[i] + nums[j] == target 这步还可以优化一下。于是用一个变量来保存，避免多次相加
 
-   var twoSum = function(nums, target) {
-       for(var i = 0, len = nums.length; i < len; i++){
-            var another = target - nums[i];
-            for(var j = i + 1; j < nums.length; j++){
-                if(nums[j] == another){
-                    return [i, j];
+       var twoSum = function(nums, target) {
+           for(var i = 0, len = nums.length; i < len; i++){
+                var another = target - nums[i];
+                for(var j = i + 1; j < nums.length; j++){
+                    if(nums[j] == another){
+                        return [i, j];
+                    }
                 }
             }
-        }
-    };
+        };
 
-//但这样并没有解决我们算法复杂度为n平方的问题，所以我们应该使用js中的对象来解决这个问题
+    //但这样并没有解决我们算法复杂度为n平方的问题，所以我们应该使用js中的对象来解决这个问题
 
-    var twoSum = function(nums, target) {
-        var map = {};
-        for(var i = 0, len = nums.length; i < len; i++){
-            var another = target - nums[i];
-            //遍历数组，如果发现对象中已经存有我们需要的值，将索引返回即可
-            if(map[another] >= 0){
-                return [map[another], i];
-            } else {
-                //对象的结构为{value: position} key为数组元素的值，value为数组元素的索引
-                map[nums[i]] = i;
+        var twoSum = function(nums, target) {
+            var map = {};
+            for(var i = 0, len = nums.length; i < len; i++){
+                var another = target - nums[i];
+                //遍历数组，如果发现对象中已经存有我们需要的值，将索引返回即可
+                if(map[another] >= 0){
+                    return [map[another], i];
+                } else {
+                    //对象的结构为{value: position} key为数组元素的值，value为数组元素的索引
+                    map[nums[i]] = i;
+                }
             }
-        }
-    };  
+        };  
 	</script>
 </body>
 </html>
