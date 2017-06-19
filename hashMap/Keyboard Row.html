@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Keyboard Row</title>
+</head>
+<body>
+	<script>
+		/*
+			Given a List of words, return the words that can be typed using letters of alphabet on only one row's of American keyboard like the image below.
+
+
+			American keyboard
+
+
+			Example 1:
+			Input: ["Hello", "Alaska", "Dad", "Peace"]
+			Output: ["Alaska", "Dad"]
+		*/
+		/**
+		 * @param {string[]} words
+		 * @return {string[]}
+		 */
+		var findWords = function(words){ 
+			//直接暴力ac
+		    var arr = [],
+		        row = {
+		            '0': {'q':1,'w':1,'e':1,'r':1,'t':1,'y':1,'u':1,'i':1,'o':1,'p':1},
+		            '1': {'a':1,'s':1,'d':1,'f':1,'g':1,'h':1,'j':1,'k':1,'l':1},
+		            '2': {'z':1,'x':1,'c':1,'v':1,'b':1,'n':1,'m':1}
+		        };
+		    for(var i = 0, len = words.length; i < len; i++){
+		        var isMatching = true;
+		            pattern = '';
+		        for(var j = 0, _len = words[i].length; j < _len; j++){
+		            var letter = words[i][j];
+		            letter = letter.toLowerCase();
+		            if(!pattern){
+		                if(row['0'][letter]){
+		                    pattern = '0';
+		                } else if(row['1'][letter]){
+		                    pattern = '1';
+		                } else if(row['2'][letter]){
+		                    pattern = '2';
+		                }
+		            }
+		            if(!row[pattern][letter]){
+		                isMatching = false;
+		                j = _len;
+		            }
+		        }
+		        if(isMatching) arr.push(words[i]);
+		    }
+		    return arr;
+		};
+	</script>
+</body>
+</html>
