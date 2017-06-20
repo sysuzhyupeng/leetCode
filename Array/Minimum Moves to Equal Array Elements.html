@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Minimum Moves to Equal Array Elements</title>
+</head>
+<body>
+	<script>
+		/*
+			Given a non-empty integer array of size n, find the minimum number of moves required to make all array elements equal, where a move is incrementing n - 1 elements by 1.
+
+			Example:
+
+			Input:
+			[1,2,3]
+
+			Output:
+			3
+
+			Explanation:
+			Only three moves are needed (remember each move increments two elements):
+
+			[1,2,3]  =>  [2,3,3]  =>  [3,4,3]  =>  [4,4,4]
+		*/
+		/**
+		 * @param {number[]} nums
+		 * @return {number}
+		 */
+		var minMoves = function(nums) {
+			//每次找到最大数以外的数加1，但是每次找到最大的数比较麻烦，因为最大的数是变化的
+			//比如数组[1，2，3], 给除去最大值的其他数字加1，变为[2，3，3]，全体减1，并不影响数字间相对差异，变为[1，2，2]，这个结果其实就是原始数组的最大值3自减1
+			//也就是说我们这个操作，相当于最大值自减1的操作
+			//那么问题也可能转化为，将所有数字都减小到最小值
+		    var min = Number.MAX_VALUE,
+		        res = 0;
+		    for(var i = 0, len = nums.length; i < len; i++){
+		        if(nums[i] < min){
+		            min = nums[i];
+		        }
+		    }
+		    for(var j = 0; j < len; j++){
+		        res += nums[j] - min;
+		    }
+		    return res;
+		};
+	</script>
+</body>
+</html>
