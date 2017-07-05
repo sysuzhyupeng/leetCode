@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Maximum Product of Three Numbers</title>
+</head>
+<body>
+	<script>
+		/*
+			Given an integer array, find three numbers whose product is maximum and output the maximum product.
+
+			Example 1:
+			Input: [1,2,3]
+			Output: 6
+			Example 2:
+			Input: [1,2,3,4]
+			Output: 24
+		*/
+		//求最大乘积，因为是三个数，所以排序之后无论多少个负数，最多只能取两个
+		/**
+		 * @param {number[]} nums
+		 * @return {number}
+		 */
+		var maximumProduct = function(nums) {
+			//注意js对数字排序需要加入回调函数
+		    nums = nums.sort(function(a, b){
+		        return a - b;
+		    });
+		    var n = nums.length;
+		    var s = nums[n-1] * nums[n-2] * nums[n-3];
+		    s = Math.max(s, nums[n-1] * nums[n-2] * nums[0]);
+		    s = Math.max(s, nums[n-1] * nums[1] * nums[0]);
+		    s = Math.max(s, nums[2] * nums[1] * nums[0]);
+		    return s;
+		};
+	</script>
+</body>
+</html>
