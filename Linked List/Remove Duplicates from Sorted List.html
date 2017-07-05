@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Remove Duplicates from Sorted List</title>
+</head>
+<body>
+	<script>
+		/*
+			Given a sorted linked list, delete all duplicates such that each element appear only once.
+
+			For example,
+			Given 1->1->2, return 1->2.
+			Given 1->1->2->3->3, return 1->2->3.
+		*/
+		/**
+		 * Definition for singly-linked list.
+		 * function ListNode(val) {
+		 *     this.val = val;
+		 *     this.next = null;
+		 * }
+		 */
+		/**
+		 * @param {ListNode} head
+		 * @return {ListNode}
+		 */
+		var deleteDuplicates = function(head) {
+		    if(head === null || head.next === null) return head;
+		    var obj = {},
+		        node = head;
+		    obj[node.val] = 1;
+		    while(node.next){
+		        var value = node.next.val;
+		        if(obj[value]){
+		            if(node.next.next){
+		                var next = node.next.next;
+		                node.next = next;   
+		            } else {
+		                node.next = null;
+		            }
+		        } else {
+		            obj[value] = 1;
+		            node = node.next;
+		        }
+		    }
+		    return head;
+		};
+	</script>
+</body>
+</html>
