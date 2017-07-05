@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Intersection of Two Arrays II</title>
+</head>
+<body>
+	<script>
+		/*
+			Given two arrays, write a function to compute their intersection.
+
+			Example:
+			Given nums1 = [1, 2, 2, 1], nums2 = [2, 2], return [2, 2].
+
+			Note:
+			Each element in the result should appear as many times as it shows in both arrays.
+			The result can be in any order.
+		*/
+		/**
+		 * @param {number[]} nums1
+		 * @param {number[]} nums2
+		 * @return {number[]}
+		 */
+		var intersect = function(nums1, nums2) {
+		    var map = {},
+		        arr = [];
+		    for(var i = 0, len = nums1.length; i < len; i++){
+		        if(map[nums1[i]]){
+		            map[nums1[i]]++;
+		        } else {
+		            map[nums1[i]] = 1;
+		        }
+		    }
+		    for(var j = 0, _len = nums2.length; j < _len; j++){
+		    	//如果当前字符在哈希表中的个数大于0，则将此字符加入结果arr中，然后哈希表的对应值自减1
+		        if(map[nums2[j]]-- > 0){
+		            arr.push(nums2[j]);
+		        }
+		    }
+		    return arr;
+		};
+	</script>
+</body>
+</html>
