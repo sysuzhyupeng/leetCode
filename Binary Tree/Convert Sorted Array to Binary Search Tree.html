@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Convert Sorted Array to Binary Search Tree</title>
+</head>
+<body>
+	<script>
+		/*
+			Given an array where elements are sorted in ascending order, convert it to a height balanced BST.
+		*/
+		/**
+		 * Definition for a binary tree node.
+		 * function TreeNode(val) {
+		 *     this.val = val;
+		 *     this.left = this.right = null;
+		 * }
+		 */
+		/**
+		 * @param {number[]} nums
+		 * @return {TreeNode}
+		 */
+		var sortedArrayToBST = function(nums) {
+		    //如果把一个数组看成一棵树（也就是以中点为根，左右为左右子树，依次下去）数组就等价于一个二分查找树
+		    if (nums.length == 0) {
+		        return null;
+		    }
+		    var head = helper(nums, 0, nums.length - 1);
+		    return head;
+		    function helper(nums, low, high){
+		        if (low > high) {
+		            return null;
+		        }
+		        var mid = Math.floor((low + high) / 2);
+		        var node = new TreeNode(nums[mid]);
+		        node.left = helper(nums, low, mid - 1);
+		        node.right = helper(nums, mid + 1, high);
+		        return node;
+		    }
+		};
+	</script>
+</body>
+</html>
