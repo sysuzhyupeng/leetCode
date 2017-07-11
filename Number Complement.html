@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Number Complement</title>
+</head>
+<body>
+	<script type="text/javascript">
+		/*
+		Given a positive integer, output its complement number. The complement strategy is to flip the bits of its binary representation.
+
+		Note:
+		The given integer is guaranteed to fit within the range of a 32-bit signed integer.
+		You could assume no leading zero bit in the integer’s binary representation.
+		Example 1:
+		Input: 5
+		Output: 2
+		Explanation: The binary representation of 5 is 101 (no leading zero bits),
+		*/
+		/**
+		 * @param {number} num
+		 * @return {number}
+		 */
+		//如1011，将1111 - 1011就能得到补数
+		//所以只需要求出1111的十进制数即可
+		var findComplement = function(num) {
+		    var i = 0,
+		        j = 0;
+
+		    while (i < num){
+		        i += Math.pow(2, j);
+		        j++;
+		    }
+
+		    return i - num;
+		};
+	</script>
+</body>
+</html>
