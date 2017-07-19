@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Implement Queue using Stacks</title>
+</head>
+<body>
+	<script>
+		/*
+			Implement the following operations of a queue using stacks.
+
+			push(x) -- Push element x to the back of queue.
+			pop() -- Removes the element from in front of queue.
+			peek() -- Get the front element.
+			empty() -- Return whether the queue is empty.
+		*/
+		/**
+		 * Initialize your data structure here.
+		 */
+		var MyQueue = function() {
+		    this.stack = [];
+		};
+
+		/**
+		 * Push element x to the back of queue. 
+		 * @param {number} x
+		 * @return {void}
+		 */
+		MyQueue.prototype.push = function(x) {
+		    var helpStack = [];
+		    while(this.stack.length){
+		        helpStack.push(this.stack.pop());
+		    }
+		    this.stack.push(x);
+		    while(helpStack.length){
+		        this.stack.push(helpStack.pop());
+		    }
+		};
+
+		/**
+		 * Removes the element from in front of queue and returns that element.
+		 * @return {number}
+		 */
+		MyQueue.prototype.pop = function() {
+		    var top = this.stack.pop();
+		    return top;
+		};
+
+		/**
+		 * Get the front element.
+		 * @return {number}
+		 */
+		MyQueue.prototype.peek = function() {
+		    return this.stack[this.stack.length - 1];
+		};
+
+		/**
+		 * Returns whether the queue is empty.
+		 * @return {boolean}
+		 */
+		MyQueue.prototype.empty = function() {
+		    return this.stack.length === 0;
+		};
+
+		/** 
+		 * Your MyQueue object will be instantiated and called as such:
+		 * var obj = Object.create(MyQueue).createNew()
+		 * obj.push(x)
+		 * var param_2 = obj.pop()
+		 * var param_3 = obj.peek()
+		 * var param_4 = obj.empty()
+		 */
+	</script>
+</body>
+</html>
