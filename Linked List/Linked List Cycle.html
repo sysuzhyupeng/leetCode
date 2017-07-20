@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Linked List Cycle</title>
+</head>
+<body>
+	<script>
+		/*
+			Given a linked list, determine if it has a cycle in it.
+
+			Follow up:
+			Can you solve it without using extra space?
+		*/
+		/**
+		 * Definition for singly-linked list.
+		 * function ListNode(val) {
+		 *     this.val = val;
+		 *     this.next = null;
+		 * }
+		 */
+
+		/**
+		 * @param {ListNode} head
+		 * @return {boolean}
+		 */
+		var hasCycle = function(head) {
+		    if(head === null || head.next === null) return false;
+		    //设置两个指针
+		    //如果没有环链，fast遍历之后就结束
+		    //如果出现环链，fast会不断在环链中循环，知道slow出现
+		    var slow = head,
+		        fast = head.next;
+		    while(slow !== fast){
+		        if(fast === null || fast.next === null){
+		            return false;
+		        }
+		        slow = slow.next;
+		        fast = fast.next.next;
+		    }
+		    return true;
+		};
+	</script>
+</body>
+</html>
