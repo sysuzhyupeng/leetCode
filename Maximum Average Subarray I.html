@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Maximum Average Subarray I</title>
+</head>
+<body>
+	<script>
+		/*
+			Given an array consisting of n integers, find the contiguous subarray of given length k that has the maximum average value. And you need to output the maximum average value.
+
+			Example 1:
+			Input: [1,12,-5,-6,50,3], k = 4
+			Output: 12.75
+			Explanation: Maximum average is (12-5-6+50)/4 = 51/4 = 12.75
+		*/
+		//先分享一种超时解法
+		var len = nums.length,
+	    	max = -Number.MAX_VALUE;
+	    for(var i = 0; i < len; i++){
+	        if(i > len - k) break;
+	        var sum = 0;
+	        //包含了对sum的重复求值
+	        for(var j = i; j < i + k; j++){
+	            sum += nums[j];
+	        }
+	        max = Math.max(max, sum);
+	    }
+	    return Number(max / k);
+
+	    //ac解法
+	    /**
+		 * @param {number[]} nums
+		 * @param {number} k
+		 * @return {number}
+		 */
+		var findMaxAverage = function(nums, k) {
+		    var sum = 0;
+		    for(var i = 0; i < k; i++) sum += nums[i];
+		    var max = sum;
+		    for(var j = k, len = nums.length; j < len; j++){
+		    	//连续k个数，只需要在每次迭代统计sum的过程中统计max
+		        sum += nums[j] - nums[j - k];
+		        max = Math.max(max, sum);
+		    }
+		    return Number(max / k);
+		};
+	</script>
+</body>
+</html>
