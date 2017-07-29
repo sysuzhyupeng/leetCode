@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Palindromic Substrings</title>
+</head>
+<body>
+	<script>
+		/*
+			Given a string, your task is to count how many palindromic substrings in this string.
+
+			The substrings with different start indexes or end indexes are counted as different substrings even they consist of same characters.
+
+			Example 1:
+			Input: "abc"
+			Output: 3
+			Explanation: Three palindromic strings: "a", "b", "c".
+			Example 2:
+			Input: "aaa"
+			Output: 6
+			Explanation: Six palindromic strings: "a", "a", "a", "aa", "aa", "aaa".
+		*/
+		//判断一个字符串有多少回文子串，可以用每个字符向两边辐射的方法
+		/**
+		 * @param {string} s
+		 * @return {number}
+		 */
+		var countSubstrings = function(s) {
+		    if(s.length === 0 || s === null) return null;
+		    var count = 0;
+		    for(var i = 0, len = s.length; i < len; i++){
+		    	//单个字符肯定是回文，奇数回文
+		        extendPalindrome(s, i, i);
+		        //偶数回文
+		        extendPalindrome(s, i, i + 1);
+		    }
+		    return count;
+		    function extendPalindrome(s, left, right){
+		        while(left >= 0 && right < len && s[left] === s[right]){
+		            count++;
+		            left--;
+		            right++;
+		        }
+		    }
+		};
+	</script>
+</body>
+</html>
