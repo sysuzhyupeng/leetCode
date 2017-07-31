@@ -36,7 +36,6 @@
 			| Max       |
 			+-----------+
 		*/
-		# Write your MySQL query statement below
 		SELECT Name AS Customers
 		from Customers AS A
 		WHERE NOT EXISTS (SELECT 1 FROM Orders AS B WHERE A.Id = B.CustomerId)

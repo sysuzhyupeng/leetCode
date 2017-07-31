@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Classes More Than 5 Students</title>
+</head>
+<body>
+	<script>
+		/*
+			There is a table courses with columns: student and class
+
+			Please list out all classes which have more than or equal to 5 students.
+
+			For example, the table:
+
+			+---------+------------+
+			| student | class      |
+			+---------+------------+
+			| A       | Math       |
+			| B       | English    |
+			| C       | Math       |
+			| D       | Biology    |
+			| E       | Math       |
+			| F       | Computer   |
+			| G       | Math       |
+			| H       | Math       |
+			| I       | Math       |
+			+---------+------------+
+			Should output:
+
+			+---------+
+			| class   |
+			+---------+
+			| Math    |
+			+---------+
+		*/
+		select class from courses
+		group by class
+		//count计算不重复记录
+		having count(distinct student) >= 5
+	</script>
+</body>
+</html>
