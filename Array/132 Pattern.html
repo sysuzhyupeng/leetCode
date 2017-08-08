@@ -34,20 +34,27 @@
 		 * @param {number[]} nums
 		 * @return {boolean}
 		 */
+		//问题的核心在于我们寻找1 3 2的过程中，可以将问题更新为1 300 200，即将第二、第三个数不断扩大
 		var find132pattern = function(nums) {
-		    var min = -Number.MAX_VALUE,
+			//second代表1 3 2模式中的2
+		    var second = -Number.MAX_VALUE,
 		        stack = [];
 		    for(var i = nums.length - 1; i >= 0; i--){
-		        if(nums[i] < min) return true;
-		        //对于数组中每个元素，只要大于当前的min，就将它push进栈中
-		        //同时将之前存储在栈中比当前元素小的元素弹出，并更新min
-		        //如果下一个遍历到的数小于min，那么就得到了1 3 2的模式
+		    	//当没有元素压入栈中，second为js最小值，不可能return true
+		    	//stack中至少会保留当前元素，或者当前元素和最大元素
+		    	//stack中刚开始保存的实际上是一个如1 1 2 3这样的上升序列，这样的序列不可能是1 3 2模式
+		    	//栈顶一直是保持着是上一个元素
+		    	//一旦有一个大于栈顶的元素出现，就更新second，如stack中的1 1 2中突然遍历到一个3，那么1、1、2都会被弹出
+		    	//second被更新为2(是目前比栈顶元素小的最大数)
+		    	//下一个元素小于second，就满足1 3 2模式
+		        if(nums[i] < second) return true;
 	            var len = stack.length;
 	            while(len && nums[i] > stack[len - 1]){
-	                min = stack[len - 1];
+	                second = stack[len - 1];
 	                stack.pop();
 	                len--;
 	            }
+	            //小于栈顶元素的且不满足1 3 2的时候，继续push进栈
 	            stack.push(nums[i]);
 		    }
 		    return false;
