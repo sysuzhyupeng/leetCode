@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Delete Operation for Two Strings</title>
+</head>
+<body>
+	<script>
+		/*
+			Dynamic Programming Algorithm简称dp,
+			动态规划算法，
+			指这样一类特殊的活动过程，过程可以按时间顺序分解成若干个相互联系的阶段，在每一个阶段都需要做出决策，全部过程的决策是一个决策序列。
+			将待求解的问题分解成若干个相互联系的子问题，先求解子问题，以后再次遇到时直接引用答案，不必重新求解。
+		*/
+		/*
+			如果当前的两个字符相等，那么dp[i][j] = dp[i-1][j-1] + 1
+			因为要错位比较，所以dp[i][j]就要取dp[i-1][j]跟dp[i][j-1]中的较大值了
+		*/
+		/*
+			问题描述：
+			Given two words word1 and word2, find the minimum number of steps required to make word1 and word2 the same, where in each step you can delete one character in either string.
+
+			Example 1:
+			Input: "sea", "eat"
+			Output: 2
+			Explanation: You need one step to make "sea" to "ea" and another step to make "eat" to "ea".
+			Note:
+			The length of given words won't exceed 500.
+			Characters in given words can only be lower-case letters.
+		*/
+		/**
+		 * @param {string} word1
+		 * @param {string} word2
+		 * @return {number}
+		 */
+		var minDistance = function(word1, word2) {
+		    var len1 = word1.length,
+		        len2 = word2.length;
+		    var dp = [];
+		    for(var i = 0; i <= len1; i++){
+		        dp[i] = [];
+		        for(var j = 0; j <= len2; j++){
+		            dp[i][j] = 0;
+		        }
+		    }
+		    for(var i = 0; i <= len1; i++){
+		        for(var j = 0; j <= len2; j++){
+		            if(i === 0 || j === 0){
+		                dp[i][j] = 0;
+		                continue;
+		            }
+		            if(word1[i - 1] === word2[j - 1]){
+		                dp[i][j] = dp[i - 1][j - 1] + 1;
+		            } else {
+		                dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+		            }
+		        }
+		    }
+		    return len1 + len2 - 2 * dp[len1][len2];
+		};
+	</script>
+</body>
+</html>
