@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Palindrome Linked List</title>
+</head>
+<body>
+	<script>
+		/*
+			Given a singly linked list, determine if it is a palindrome.
+
+			Follow up:
+			Could you do it in O(n) time and O(1) space?
+		*/
+		/**
+		 * Definition for singly-linked list.
+		 * function ListNode(val) {
+		 *     this.val = val;
+		 *     this.next = null;
+		 * }
+		 */
+		/**
+		 * @param {ListNode} head
+		 * @return {boolean}
+		 */
+		var isPalindrome = function(head) {
+		    if(head === null) return true;
+		    var slower = head,
+		        faster = head;
+		    var stack = [];
+		    stack.push(slower.val);
+		    while(faster.next && faster.next.next){
+		        faster = faster.next.next;
+		        slower = slower.next;
+		        stack.push(slower.val);
+		    }
+		    while(slower.next !== null){
+		        var element = stack.pop();
+		        if(element !== slower.val) return false;
+		        slower = slower.next;
+		    }
+		    if(stack.length === 0){
+		        return true;
+		    } else {
+		        return false;
+		    }
+		};
+	</script>
+</body>
+</html>

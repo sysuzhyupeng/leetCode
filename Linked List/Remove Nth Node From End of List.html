@@ -31,7 +31,7 @@
 		 * @return {ListNode}
 		 */
 		var removeNthFromEnd = function(head, n) {
-		    if(head == null || head.next == null) return null;
+		    if(head === null || head.next === null) return null;
 		    var listNode = new ListNode(0);
 		    var slower = listNode,
 		        faster = head;
