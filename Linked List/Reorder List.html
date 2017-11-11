@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Reorder List</title>
+</head>
+<body>
+	<script>
+		/*
+			Given a singly linked list L: L0→L1→…→Ln-1→Ln,
+			reorder it to: L0→Ln→L1→Ln-1→L2→Ln-2→…
+
+			You must do this in-place without altering the nodes' values.
+
+			For example,
+			Given {1,2,3,4}, reorder it to {1,4,2,3}.
+		*/
+		/*
+			(1) 找到链表后一半。
+			(2) 将后一半节点反转。
+			(3) 将后一半节点依次插入前一半。
+
+			获得链表长度可以扫描两遍，第一遍得到L，并计算k。而第二遍扫描找到节点k。而更好的方法则是采用快慢双指针的策略：f每次走两步，s每次走一步。(少扫描链表的一半)
+
+			反转链表只需要顺序遍历，保存后一个节点引用即可。
+		*/
+		/**
+		 * Definition for singly-linked list.
+		 * function ListNode(val) {
+		 *     this.val = val;
+		 *     this.next = null;
+		 * }
+		 */
+		/**
+		 * @param {ListNode} head
+		 * @return {void} Do not return anything, modify head in-place instead.
+		 */
+		var reorderList = function(head) {
+		    function reverse(head){
+		        if(head === null) return null;
+		        //pre为前一个节点
+		        var pre = head,
+		            cur = head.next;
+		        while(cur.next !== null){
+		            var nextNode = cur.next;
+		            cur.next = nextNode.next;
+		            nextNode.next = pre.next;
+		            pre.next = nextNode;
+		        }
+		    }
+		    function findPreMid(head){
+		         if(head === null) return null;
+		         var p1 = head,
+		             p2 = head;
+		         while(p2.next && p2.next.next){
+		            p2 = p2.next.next; 
+		            p1 = p1.next;
+		         }   
+		         //此刻p1为l/2 - 1位置
+		         return p1;
+		    }
+		    //当头节点为空或者只有一个节点的时候，不需要反转
+		    if(head === null || head.next === null) return;
+		    var preMiddle = findPreMid(head);
+		    reverse(preMiddle);
+		    
+		    var p1 = head,
+		        p2 = preMiddle.next;
+		    while(p1 !== preMiddle){
+		        preMiddle.next = p2.next;
+		        p2.next = p1.next;
+		        p1.next = p2;
+		        p1 = p2.next;
+		        p2 = preMiddle.next;
+		    }
+		};
+	</script>
+</body>
+</html>
