@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Add Two Numbers II</title>
+</head>
+<body>
+	<script>
+		/*
+			You are given two non-empty linked lists representing two non-negative integers. The most significant digit comes first and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.
+
+			You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+
+			Follow up:
+			What if you cannot modify the input lists? In other words, reversing the lists is not allowed.
+
+			Example:
+
+			Input: (7 -> 2 -> 4 -> 3) + (5 -> 6 -> 4)
+			Output: 7 -> 8 -> 0 -> 7
+		*/
+		/**
+		 * Definition for singly-linked list.
+		 * function ListNode(val) {
+		 *     this.val = val;
+		 *     this.next = null;
+		 * }
+		 */
+		/**
+		 * @param {ListNode} l1
+		 * @param {ListNode} l2
+		 * @return {ListNode}
+		 */
+		var addTwoNumbers = function(l1, l2) {
+			//使用栈来保存链表
+		    var s1 = [],
+		        s2 = [];
+		    while(l1){
+		        s1.push(l1.val);
+		        l1 = l1.next;
+		    }
+		    while(l2){
+		        s2.push(l2.val);
+		        l2 = l2.next;
+		    }
+		    var total = 0,
+		        node = null,
+		        head = null;
+		    while(s1.length || s2.length){
+		        if(s1.length){
+		            total += s1.pop();
+		        }
+		        if(s2.length){
+		            total += s2.pop();
+		        }
+		        head = new ListNode(total % 10);
+		        head.next = node;
+		        total = Math.floor(total / 10);
+		        node = head;
+		    }
+		    if(total !== 0){
+		        head = new ListNode(total);
+		        head.next = node;
+		    }
+		    return head;
+		};
+	</script>
+</body>
+</html>
