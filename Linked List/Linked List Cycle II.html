@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Linked List Cycle II</title>
+</head>
+<body>
+	<script>
+		/*
+			Given a linked list, return the node where the cycle begins. If there is no cycle, return null.
+
+			Note: Do not modify the linked list.
+
+			Follow up:
+			Can you solve it without using extra space?
+		*/
+		/**
+		 * Definition for singly-linked list.
+		 * function ListNode(val) {
+		 *     this.val = val;
+		 *     this.next = null;
+		 * }
+		 */
+
+		/**
+		 * @param {ListNode} head
+		 * @return {ListNode}
+		 */
+		/*
+			我们设从起点到cycle开始点的距离为L1,
+			从cycle点到快慢指针相遇点的距离为L2,
+			cycle的半径是r。
+
+			当快指针第一次到达cycle时，慢指针还没到达，快指针开始环绕
+			当慢指针到达cycle开始环绕的时候，在第一圈一定会被快指针追上(因为速度是两倍)
+
+			所以我们可以列出公式：
+			2(L1 + L2) = L1 + nr + L2
+			调整之后可以得到
+			L1 = (n - 1)r + r - L2
+
+			r - L2是慢指针走到cycle起始点的路程，
+			也就是另一个慢指针2从头结点出发，走L1的路程，
+			原来慢指针正好会多走若干圈并回到起始点。
+		*/
+		var detectCycle = function(head) {
+		    if(head === null) return null;
+		    if(head.next === head) return head;
+		    var slower = head,
+		        faster = head;
+		    while(faster.next !== null && slower.next){
+		        faster = faster.next;
+		        if(faster.next){
+		            faster = faster.next;
+		        }
+		        slower = slower.next;
+		        //相遇了
+		        if(faster === slower) break;
+		    }
+		    if(faster === null || faster.next === null) return null;
+		    while(head !== slower){
+		        head = head.next;
+		        slower = slower.next;
+		    }
+		    return slower;
+		};
+	</script>
+</body>
+</html>
