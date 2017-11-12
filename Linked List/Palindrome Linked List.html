@@ -24,26 +24,29 @@
 		 * @return {boolean}
 		 */
 		var isPalindrome = function(head) {
-		    if(head === null) return true;
+		    if(head === null || head.next === null) return true;
 		    var slower = head,
 		        faster = head;
-		    var stack = [];
-		    stack.push(slower.val);
 		    while(faster.next && faster.next.next){
 		        faster = faster.next.next;
 		        slower = slower.next;
-		        stack.push(slower.val);
 		    }
-		    while(slower.next !== null){
-		        var element = stack.pop();
-		        if(element !== slower.val) return false;
-		        slower = slower.next;
+		    var preMid = slower;
+		    //要求O(1)空间，对preMid后面的链表进行反转
+		    var cur = preMid.next;
+		    while(cur.next !== null){
+		        var nextNode = cur.next;
+		        cur.next = nextNode.next;
+		        nextNode.next = preMid.next;
+		        preMid.next = nextNode;
 		    }
-		    if(stack.length === 0){
-		        return true;
-		    } else {
-		        return false;
+		    preMid = preMid.next;
+		    while(preMid !== null){
+		        if(preMid.val !== head.val) return false;
+		        preMid = preMid.next;
+		        head = head.next;
 		    }
+		    return true;
 		};
 	</script>
 </body>
