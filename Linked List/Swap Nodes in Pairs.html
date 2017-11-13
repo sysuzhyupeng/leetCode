@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Swap Nodes in Pairs</title>
+</head>
+<body>
+	<script>
+		/*
+			Given a linked list, swap every two adjacent nodes and return its head.
+
+			For example,
+			Given 1->2->3->4, you should return the list as 2->1->4->3.
+
+			Your algorithm should use only constant space. You may not modify the values in the list, only nodes itself can be changed.
+		*/
+		/**
+		 * Definition for singly-linked list.
+		 * function ListNode(val) {
+		 *     this.val = val;
+		 *     this.next = null;
+		 * }
+		 */
+		/**
+		 * @param {ListNode} head
+		 * @return {ListNode}
+		 */
+		var swapPairs = function(head) {
+			//如果节点为空或者只有一个节点直接返回
+		    if(head === null || head.next === null) return head;
+		    //new一个新节点插在头节点之前
+		    var pre = new ListNode(0),
+		        //保存一个头节点之前节点的引用
+		        node = pre,
+		        //cur为单数节点
+		        cur = head,
+		        //nex为双数节点
+		        pair = cur.next;
+		    pre.next = head;
+		    while(pair){
+		        var pair = cur.next,
+		        nextNode = pair.next ? pair.next: null;
+		        pair.next = cur;
+		        cur.next = nextNode;
+		        pre.next = pair;
+		        pre = cur;
+		        cur = nextNode;
+		        pair = nextNode ? nextNode.next: null;
+		    }
+		    return node.next;
+		};
+	</script>
+</body>
+</html>
