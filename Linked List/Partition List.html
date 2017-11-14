@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Partition List</title>
+</head>
+<body>
+	<script>
+		/*
+			Given a linked list and a value x, partition it such that all nodes less than x come before nodes greater than or equal to x.
+
+			You should preserve the original relative order of the nodes in each of the two partitions.
+
+			For example,
+			Given 1->4->3->2->5->2 and x = 3,
+			return 1->2->2->4->3->5.
+		*/
+		/**
+		 * Definition for singly-linked list.
+		 * function ListNode(val) {
+		 *     this.val = val;
+		 *     this.next = null;
+		 * }
+		 */
+		/**
+		 * @param {ListNode} head
+		 * @param {number} x
+		 * @return {ListNode}
+		 */
+		var partition = function(head, x) {
+		    if(head === null || head.next === null) return head;
+		    //可以使用两个链表，一个挂载小的，一个挂载大的，再串联起来
+		    var p1Node = new ListNode(0),
+		        p2Node = new ListNode(0);
+		    var p1 = p1Node,
+		        p2 = p2Node;
+		    var cur = head;
+		    while(cur){
+		        var nextNode = cur.next;
+		        if(cur.val < x){
+		            p1.next = cur;
+		            p1 = p1.next;
+		        } else {
+		            p2.next = cur;
+		            p2 = p2.next;
+		        }
+		        cur = cur.next;
+		    }
+		    p2.next = null;
+		    p1.next = p2Node.next;   
+		    return p1Node.next;
+		};
+	</script>
+</body>
+</html>
