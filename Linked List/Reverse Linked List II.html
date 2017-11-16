@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Reverse Linked List II</title>
+</head>
+<body>
+	<script>
+		/*
+			Reverse a linked list from position m to n. Do it in-place and in one-pass.
+
+			For example:
+			Given 1->2->3->4->5->NULL, m = 2 and n = 4,
+
+			return 1->4->3->2->5->NULL.
+
+			Note:
+			Given m, n satisfy the following condition:
+			1 ≤ m ≤ n ≤ length of list.
+		*/
+		/**
+		 * Definition for singly-linked list.
+		 * function ListNode(val) {
+		 *     this.val = val;
+		 *     this.next = null;
+		 * }
+		 */
+		/**
+		 * @param {ListNode} head
+		 * @param {number} m
+		 * @param {number} n
+		 * @return {ListNode}
+		 */
+		var reverseBetween = function(head, m, n) {
+		    if(m === n) return head;
+		    var start = new ListNode(0);
+		    start.next = head;
+		    var node = start;
+		    //对节点m到n之间的链表进行反转
+		    function reverse(pre, num){
+		        var cur = pre.next;
+		        for(var _count = 0; _count < num; _count++){
+		            var nextNode = cur.next;
+		            cur.next = nextNode.next;
+		            nextNode.next = pre.next;
+		            pre.next = nextNode;
+		        }
+		    }
+		    //获得节点m的前驱节点
+		    for(var pos = 1; pos< m; pos++){
+		        node = node.next;
+		    }
+		    reverse(node, n - m);
+		    return start.next;
+		};
+	</script>
+</body>
+</html>
