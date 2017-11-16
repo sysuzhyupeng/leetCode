@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Rotate List</title>
+</head>
+<body>
+	<script>
+		/*
+			Given a list, rotate the list to the right by k places, where k is non-negative.
+
+
+			Example:
+
+			Given 1->2->3->4->5->NULL and k = 2,
+
+			return 4->5->1->2->3->NULL.
+		*/
+		/**
+		 * Definition for singly-linked list.
+		 * function ListNode(val) {
+		 *     this.val = val;
+		 *     this.next = null;
+		 * }
+		 */
+		/**
+		 * @param {ListNode} head
+		 * @param {number} k
+		 * @return {ListNode}
+		 */
+		var rotateRight = function(head, k) {
+		    if(head === null || head.next === null || k === 0) return head;
+		    var start = new ListNode(0);
+		    start.next = head;
+		    var slower = start,
+		        faster = start;
+		    //先获取链表长度
+		    // i = 5
+		    for(var i = 0; faster.next !== null; i++){
+		        faster = faster.next;
+		    }
+		    //移动到要旋转的链表节点前一个
+		    // j = 3
+		    for (var j = i- k % i; j > 0; j--){
+		        slower = slower.next;   
+		    }
+		    //旋转链表
+		    faster.next = start.next;
+		    start.next = slower.next;
+		    slower.next = null;
+		    return start.next;
+		};
+	</script>
+</body>
+</html>
