@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Sort List</title>
+</head>
+<body>
+	<script>
+		/*
+			Sort a linked list in O(n log n) time using constant space complexity.
+		*/
+		/**
+		 * Definition for singly-linked list.
+		 * function ListNode(val) {
+		 *     this.val = val;
+		 *     this.next = null;
+		 * }
+		 */
+		/**
+		 * @param {ListNode} head
+		 * @return {ListNode}
+		 */
+		//归并排序
+		function mergeSort(left, right){
+		    var start = new ListNode(-1),
+		        cur = start;
+		    while(left && right){
+		        if(left.val < right.val){
+		            cur.next = left;
+		            left = left.next;
+		        } else {
+		            cur.next = right;
+		            right = right.next;
+		        }
+		        cur = cur.next;
+		    }
+		    if(left) cur.next = left;
+		    if(right) cur.next = right;
+		    return start.next;
+		}
+		var sortList = function(head) {
+		    if(head === null || head.next === null) return head;
+		    //找出链表中点
+		    var slower = head,
+		        faster = head,
+		        pre = head;
+		    while(faster && faster.next){
+		        pre = slower;
+		        slower = slower.next;
+		        faster = faster.next.next;
+		    }
+		    //将两个链表截断
+		    pre.next = null;
+		    return mergeSort(sortList(head), sortList(slower));
+		};
+	</script>
+</body>
+</html>
