@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Copy List with Random Pointer</title>
+</head>
+<body>
+	<script>
+		/*
+			A linked list is given such that each node contains an additional random pointer which could point to any node in the list or null.
+
+			Return a deep copy of the list.
+		*/
+		/**
+		 * Definition for singly-linked list with a random pointer.
+		 * function RandomListNode(label) {
+		 *     this.label = label;
+		 *     this.next = this.random = null;
+		 * }
+		 */
+
+		/**
+		 * @param {RandomListNode} head
+		 * @return {RandomListNode}
+		 */
+		var copyRandomList = function(head) {
+		    if (!head) return null;
+		    var cur = head;
+		    while (cur) {
+		        //在每个节点后面拷贝一个新节点，新节点只包含label属性
+		        var node = new RandomListNode(cur.label);
+		        node.next = cur.next;
+		        cur.next = node;
+		        cur = node.next;
+		    }
+		    cur = head;
+		    while (cur) {
+		        if (cur.random) {
+		            //直接将cur.random.next赋值上去
+		            cur.next.random = cur.random.next;
+		        }
+		        cur = cur.next.next;
+		    }
+		    cur = head;
+		    var res = head.next;
+		    while (cur) {
+		        var tmp = cur.next;
+		        cur.next = tmp.next;
+		        if(tmp.next) tmp.next = tmp.next.next;
+		        cur = cur.next;
+		    }
+		    return res;
+		};
+	</script>
+</body>
+</html>
