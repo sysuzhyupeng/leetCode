@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Convert Sorted List to Binary Search Tree</title>
+</head>
+<body>
+	<script>
+		/*
+			Convert Sorted List to Binary Search Tree
+		*/
+		/**
+		 * Definition for singly-linked list.
+		 * function ListNode(val) {
+		 *     this.val = val;
+		 *     this.next = null;
+		 * }
+		 */
+		/**
+		 * Definition for a binary tree node.
+		 * function TreeNode(val) {
+		 *     this.val = val;
+		 *     this.left = this.right = null;
+		 * }
+		 */
+		/**
+		 * @param {ListNode} head
+		 * @return {TreeNode}
+		 */
+		function build(start, end){
+		    if(start === end) return null;
+		    //找到中间节点
+		    var slower = start,
+		        faster = start;
+		    while(faster !== end && faster.next !== end){
+		        slower = slower.next;
+		        faster = faster.next.next;
+		    }
+		    var node = new TreeNode(slower.val);
+		    node.left = build(start, slower);
+		    node.right = build(slower.next, end);
+		    return node;
+		}
+		var sortedListToBST = function(head) {
+		    /*
+		        对于一个平衡二叉树来说，左子树一定小于根节点，而右子树大于根节点。
+		        所以我们需要找到链表的中间节点，这个就是根节点，
+		        链表的左半部分就是左子树，而右半部分则是右子树
+		    */
+		    return build(head, null);
+		};
+	</script>
+</body>
+</html>
